@@ -1,0 +1,41 @@
+---
+- name: Stop Cassandra Service
+  service: 
+    name: cassandra
+    state: stopped
+  tags:
+    - service
+
+- name: Collect files/directories names
+  shell: ls -1 /var/lib/cassandra/data/system/
+  register: files_names
+  notify:
+    - restart cassandra servers
+  tags:
+    - service
+
+
+- name: Remove Cassandra default configuration
+  file: 
+    path: /var/lib/cassandra/data/system/{{ item }}
+    state: absent
+  with_items: "{{ files_names.stdout_lines }}"
+  when: files_names.stdout_lines is defined
+  notify:
+    - restart cassandra servers
+  tags:
+    - service
+
+- name: Creating cassandra config file from template  
+  template: 
+    backup: yes
+    src: cassandra.yaml.j2
+    dest: "{{ cassandra_cfg_file }}"
+    group: root
+    owner: root
+    mode: 0644
+  tags:
+    - service
+  notify:
+    - restart cassandra servers
+        

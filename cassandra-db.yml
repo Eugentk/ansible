@@ -1,0 +1,7 @@
+---
+- hosts: cassandra
+  any_errors_fatal: true
+  gather_facts: yes
+  become: yes
+  roles:
+    - cassandra

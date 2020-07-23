@@ -1,0 +1,28 @@
+---
+- name: Add java repository
+  apt_repository:
+          repo: 'ppa:webupd8team/java'
+          state: present
+  tags:
+    - prepare
+
+- name: Update apt cache
+  become: yes
+  apt: update_cache=yes
+  tags:
+    - prepare
+
+- name: add cassandra GPG keys
+  shell: wget -q -O - https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
+  args:
+    executable: /bin/bash
+    warn: no
+  tags:
+    - prepare
+
+- name: add repository
+  apt_repository:
+          repo: deb http://www.apache.org/dist/cassandra/debian 311x main
+          state: present
+  tags:
+    - prepare

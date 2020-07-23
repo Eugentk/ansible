@@ -1,0 +1,26 @@
+---
+- name: Update cache before install
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  tags:
+    - install
+
+- name: install java
+  apt:
+      name: openjdk-8-jdk
+      state: present
+  tags:
+    - install
+
+- name: Install Cassandra Server
+  apt: name=cassandra state=present update_cache=yes
+  tags:
+    - install
+
+- name: Enable Cassandra Server
+  service:
+          name: cassandra
+          enabled: yes
+  tags:
+    - install

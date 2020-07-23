@@ -1,0 +1,20 @@
+---
+# vars file for cassandra
+
+# Cassandra nodes private IPs AWS
+# Used for defining seeds
+cassandra_seeds:
+    - 172.31.11.165
+    - 172.31.40.53
+
+
+# Cassandra nodes, public IP AWS
+cassandra_no_seeds:
+    - 18.157.178.14
+    - 52.58.79.230
+
+# Cassandra configuration file
+cassandra_cfg_file: /etc/cassandra/cassandra.yaml
+
+# Cassandra cluster name
+cassandra_cluster_name: DataLake
