@@ -4,13 +4,13 @@
 # Cassandra nodes private IPs AWS
 # Used for defining seeds
 cassandra_seeds:
-    - 172.31.32.175
+    - 172.31.42.129
 
 
 
 # Cassandra nodes, public IP AWS
 cassandra_no_seeds:
-    - 18.185.92.22
+    - 3.122.127.189
 
 
 # Cassandra configuration file
